@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const RoomCard = ({ room }) => {
   return (
-    <article className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col">
+    <article className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col motion-safe:animate-scale-in hover:-translate-y-1 transition-transform duration-200">
       <img
         src={room.image}
         alt={room.name}

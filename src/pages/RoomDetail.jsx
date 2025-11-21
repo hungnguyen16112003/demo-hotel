@@ -26,7 +26,7 @@ const RoomDetail = () => {
   const gallery = room.gallery?.length ? room.gallery : [room.image]
 
   return (
-    <section className="bg-white min-h-screen">
+    <section className="bg-white min-h-screen motion-safe:animate-fade-up">
       <div className="container mx-auto px-4 py-12">
         <Link
           to="/rooms"
@@ -35,7 +35,7 @@ const RoomDetail = () => {
           ← Quay lại danh sách phòng
         </Link>
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div className="space-y-4">
+          <div className="space-y-4 motion-safe:animate-fade-in">
             {gallery.map((imgUrl, index) => (
               <img
                 key={imgUrl}
@@ -45,7 +45,7 @@ const RoomDetail = () => {
               />
             ))}
           </div>
-          <div className="bg-slate-50 rounded-3xl p-8 flex flex-col">
+          <div className="bg-slate-50 rounded-3xl p-8 flex flex-col motion-safe:animate-fade-up" style={{ animationDelay: '120ms' }}>
             <span className="uppercase text-xs tracking-[0.3em] text-brand font-semibold">
               {room.name}
             </span>

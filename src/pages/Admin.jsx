@@ -98,9 +98,9 @@ const Admin = () => {
   };
 
   return (
-    <section className="min-h-screen bg-slate-50 py-16">
+    <section className="min-h-screen bg-slate-50 py-16 motion-safe:animate-fade-up">
       <div className="container mx-auto px-4 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 overflow-x-auto">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 overflow-x-auto motion-safe:animate-fade-in">
           <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-brand">Phòng</p>
@@ -155,7 +155,7 @@ const Admin = () => {
           </table>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 motion-safe:animate-fade-up" style={{ animationDelay: '150ms' }}>
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-xl font-semibold text-slate-900">Thêm / chỉnh sửa phòng</h2>
