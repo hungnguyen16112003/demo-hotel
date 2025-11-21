@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import rooms from '../data/rooms'
 
@@ -23,7 +24,12 @@ const RoomDetail = () => {
     )
   }
 
-  const gallery = room.gallery?.length ? room.gallery : [room.image]
+  // Tạo gallery bao gồm ảnh chính và các ảnh trong gallery
+  const allImages = room.gallery?.length 
+    ? [room.image, ...room.gallery] 
+    : [room.image]
+  
+  const [selectedImage, setSelectedImage] = useState(allImages[0])
 
   return (
     <section className="bg-white min-h-screen motion-safe:animate-fade-up">
@@ -35,15 +41,35 @@ const RoomDetail = () => {
           ← Quay lại danh sách phòng
         </Link>
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div className="space-y-4 motion-safe:animate-fade-in">
-            {gallery.map((imgUrl, index) => (
+          <div className="motion-safe:animate-fade-in">
+            {/* Ảnh lớn */}
+            <div className="mb-4">
               <img
-                key={imgUrl}
-                src={imgUrl}
-                alt={`${room.name} ${index + 1}`}
-                className="rounded-3xl w-full object-cover h-64 lg:h-72 shadow"
+                src={selectedImage}
+                alt={room.name}
+                className="rounded-3xl w-full object-cover h-64 lg:h-96 shadow-lg transition-opacity duration-300"
               />
-            ))}
+            </div>
+            {/* Danh sách thumbnail */}
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {allImages.map((imgUrl, index) => (
+                <button
+                  key={imgUrl}
+                  onClick={() => setSelectedImage(imgUrl)}
+                  className={`flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
+                    selectedImage === imgUrl
+                      ? 'border-brand shadow-md scale-105'
+                      : 'border-transparent hover:border-slate-300 opacity-70 hover:opacity-100'
+                  }`}
+                >
+                  <img
+                    src={imgUrl}
+                    alt={`${room.name} ${index + 1}`}
+                    className="w-20 h-20 lg:w-24 lg:h-24 object-cover"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
           <div className="bg-slate-50 rounded-3xl p-8 flex flex-col motion-safe:animate-fade-up" style={{ animationDelay: '120ms' }}>
             <span className="uppercase text-xs tracking-[0.3em] text-brand font-semibold">
