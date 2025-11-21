@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Rooms from './pages/Rooms'
 import RoomDetail from './pages/RoomDetail'
 import Admin from './pages/Admin'
+import FloatingContact from './components/FloatingContact'
 
 const navLinkClasses = ({ isActive }) =>
   `text-sm font-semibold tracking-wide px-3 py-2 rounded-full transition ${
@@ -106,6 +107,7 @@ const App = () => {
             © {new Date().getFullYear()} Demo Hotel · Made for demo purposes
           </div>
         </footer>
+        <FloatingContact />
       </div>
     </BrowserRouter>
   )

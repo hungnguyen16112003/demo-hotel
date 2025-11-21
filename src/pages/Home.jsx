@@ -51,7 +51,10 @@ const Home = () => {
               </a>
             ))}
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3 motion-safe:animate-fade-in" style={{ animationDelay: '120ms' }}>
+          <div
+            className="mt-10 grid gap-4 sm:grid-cols-3 motion-safe:animate-fade-in"
+            style={{ animationDelay: "120ms" }}
+          >
             {highlights.map((item) => (
               <div
                 key={item.label}
@@ -67,7 +70,10 @@ const Home = () => {
             ))}
           </div>
         </div>
-        <div className="grid gap-4 motion-safe:animate-fade-in" style={{ animationDelay: '200ms' }}>
+        <div
+          className="grid gap-4 motion-safe:animate-fade-in"
+          style={{ animationDelay: "200ms" }}
+        >
           <img
             src="https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=900&q=80"
             alt="Khách sạn"
@@ -81,7 +87,10 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-16 motion-safe:animate-fade-up" style={{ animationDelay: '150ms' }}>
+      <section
+        className="bg-slate-50 py-16 motion-safe:animate-fade-up"
+        style={{ animationDelay: "150ms" }}
+      >
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div>
