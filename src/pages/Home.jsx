@@ -36,7 +36,25 @@ const Home = () => {
           <h1 className="mt-4 text-4xl lg:text-5xl font-semibold text-slate-900 leading-tight">
             Kỳ nghỉ thư thái cạnh biển với dịch vụ chuẩn 4 sao
           </h1>
-          <p className="mt-4 text-slate-600 text-lg">
+          
+          {/* Hình ảnh trên mobile - hiển thị sau tiêu đề */}
+          <div
+            className="mt-6 grid gap-4 lg:hidden motion-safe:animate-fade-in"
+            style={{ animationDelay: "200ms" }}
+          >
+            <img
+              src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80"
+              alt="Khách sạn"
+              className="rounded-3xl shadow-xl object-cover h-72 w-full"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1505691723518-36a5ac3be353?auto=format&fit=crop&w=900&q=80"
+              alt="Phòng nghỉ"
+              className="rounded-3xl shadow-xl object-cover h-64 w-full hidden sm:block"
+            />
+          </div>
+
+          <p className="mt-4 lg:mt-4 text-slate-600 text-lg">
             Không gian đương đại, tiện nghi sang trọng và đội ngũ hỗ trợ 24/7
             giúp bạn tận hưởng từng khoảnh khắc tại Đà Nẵng.
           </p>
@@ -70,12 +88,14 @@ const Home = () => {
             ))}
           </div>
         </div>
+        
+        {/* Hình ảnh trên desktop - hiển thị bên phải */}
         <div
-          className="grid gap-4 motion-safe:animate-fade-in"
+          className="hidden lg:grid gap-4 motion-safe:animate-fade-in"
           style={{ animationDelay: "200ms" }}
         >
           <img
-            src="https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=900&q=80"
+            src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80"
             alt="Khách sạn"
             className="rounded-3xl shadow-xl object-cover h-72 w-full"
           />

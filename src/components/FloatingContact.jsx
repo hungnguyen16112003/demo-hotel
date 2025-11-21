@@ -20,16 +20,17 @@ const FloatingContact = () => {
         <a
           key={option.label}
           href={option.href}
-          className={`relative flex items-center gap-3 rounded-full ${option.bg} px-4 py-2.5 shadow-xl shadow-brand/20 border border-white/70 hover:-translate-y-1 hover:shadow-brand/40 transition motion-safe:animate-fade-up animate-pulse-ring`}
+          className={`relative flex items-center justify-center md:justify-start gap-0 md:gap-3 rounded-full ${option.bg} px-3 py-3 md:px-4 md:py-2.5 shadow-xl shadow-brand/20 border border-white/70 hover:-translate-y-1 hover:shadow-brand/40 transition motion-safe:animate-fade-up animate-pulse-ring`}
           style={{ animationDelay: `${index * 120}ms` }}
+          title={option.label}
         >
           <img
             src={option.icon}
             alt={option.label}
-            className="h-10 w-10 rounded-full ring-2 ring-white/40 object-contain motion-safe:animate-float"
+            className="h-10 w-10 md:h-10 md:w-10 rounded-full object-contain motion-safe:animate-float"
             aria-hidden="true"
           />
-          <span className="text-sm font-semibold text-brand">{option.label}</span>
+          <span className="hidden md:inline text-sm font-semibold text-brand">{option.label}</span>
         </a>
       ))}
     </div>

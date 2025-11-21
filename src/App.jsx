@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import Home from './pages/Home'
 import Rooms from './pages/Rooms'
@@ -37,15 +38,60 @@ const contactDetails = [
 ]
 
 const App = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+      if (window.innerWidth >= 768) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isDesktopMenuOpen && !event.target.closest('.menu-container')) {
+        setIsDesktopMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isDesktopMenuOpen])
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const toggleDesktopMenu = () => {
+    setIsDesktopMenuOpen(!isDesktopMenuOpen)
+  }
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+  }
+
+  const closeDesktopMenu = () => {
+    setIsDesktopMenuOpen(false)
+  }
+
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col bg-white">
         <header className="border-b border-slate-100 bg-white/95 backdrop-blur sticky top-0 z-20 motion-safe:animate-fade-in">
           <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <NavLink to="/" className="text-2xl font-semibold text-brand">
+            <NavLink to="/" className="text-2xl font-semibold text-brand" onClick={closeMobileMenu}>
               Demo Hotel
             </NavLink>
-            <nav className="flex items-center gap-2">
+            
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-2">
               <NavLink to="/" className={navLinkClasses} end>
                 Trang chủ
               </NavLink>
@@ -56,7 +102,60 @@ const App = () => {
                 Admin
               </NavLink>
             </nav>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="md:hidden p-2 rounded-lg text-slate-600 hover:text-brand hover:bg-slate-100 transition-all duration-300"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className={`w-6 h-6 transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-90 scale-110' : 'rotate-0 scale-100'}`}
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMobileMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden border-t border-slate-100 bg-white animate-slide-down">
+              <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
+                <NavLink
+                  to="/"
+                  className={navLinkClasses}
+                  end
+                  onClick={closeMobileMenu}
+                >
+                  Trang chủ
+                </NavLink>
+                <NavLink
+                  to="/rooms"
+                  className={navLinkClasses}
+                  onClick={closeMobileMenu}
+                >
+                  Danh sách phòng
+                </NavLink>
+                <NavLink
+                  to="/admin"
+                  className={navLinkClasses}
+                  onClick={closeMobileMenu}
+                >
+                  Admin
+                </NavLink>
+              </nav>
+            </div>
+          )}
         </header>
 
         <main className="flex-1">
